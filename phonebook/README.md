@@ -1,2 +1,0 @@
-# phonebook
-Test task DINS
