@@ -1,6 +1,6 @@
 package com.dins.phonebook.service;
 
-import com.dins.phonebook.entity.User;
+import com.dins.phonebook.domain.User;
 import org.springframework.hateoas.EntityModel;
 
 public interface UserService {
