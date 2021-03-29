@@ -1,9 +1,9 @@
 package com.dins.phonebook.service;
 
-import com.dins.phonebook.controller.MainController;
-import com.dins.phonebook.controller.UserPhoneBookNoteController;
-import com.dins.phonebook.entity.PhoneBookNote;
-import com.dins.phonebook.entity.User;
+import com.dins.phonebook.controller.UserPhoneBookController;
+import com.dins.phonebook.domain.PhoneBookNote;
+import com.dins.phonebook.domain.User;
+import com.dins.phonebook.exception.DuplicatePhoneNumber;
 import com.dins.phonebook.exception.NoteNotFoundException;
 import com.dins.phonebook.exception.UserNotFoundException;
 import com.dins.phonebook.repository.PhoneBookRepository;
@@ -29,7 +29,8 @@ public class PhoneBookServiceImpl implements PhoneBookService{
 
     @Override
     public Optional<PhoneBookNote> getPhoneBookNoteById(Long id) {
-        return Optional.empty();
+        PhoneBookNote phoneBookNote = phoneBookRepository.findById(id).orElseThrow(()->new NoteNotFoundException(id));
+        return Optional.ofNullable(phoneBookNote);
     }
 
     @Override
@@ -44,17 +45,37 @@ public class PhoneBookServiceImpl implements PhoneBookService{
         PhoneBookNote phoneBookNote = phoneBookRepository.findPhoneBookNoteByUserIdAndId(id, noteId)
                 .orElseThrow(() -> new NoteNotFoundException(id));
         return EntityModel.of(phoneBookNote,
-                linkTo(methodOn(UserPhoneBookNoteController.class).getNote(id, noteId)).withSelfRel(),
-                linkTo(methodOn(UserPhoneBookNoteController.class).getNotes(id)).withRel("user_notes"));
+                linkTo(methodOn(UserPhoneBookController.class).getNote(id, noteId)).withSelfRel(),
+                linkTo(methodOn(UserPhoneBookController.class).getNotes(id)).withRel("user_notes"));
     }
 
     @Override
     public void deletePhoneBookNote(Long id) {
+        phoneBookRepository.deleteById(id);
+    }
 
+    @Override
+    public void deletePhoneBookNoteByUserIdAndPhoneBookId(Long id, Long phoneBookNoteId) {
+        phoneBookRepository.deletePhoneBookNoteByUserIdAndId(id, phoneBookNoteId);
     }
 
     @Override
     public void addPhoneBookNote(Long id, PhoneBookNote phoneBookNote) {
+        phoneBookNote.setUser(userRepository.findById(id).get());
+        try {
+            phoneBookRepository.save(phoneBookNote);
+        } catch (Exception e){
+            throw new DuplicatePhoneNumber(phoneBookNote.getPhoneNumber());
+        }
+    }
 
+    @Override
+    public void updatePhoneBookNoteByUserIdAndId(Long id, Long noteId, String name, String phoneNumber) {
+        phoneBookRepository.updatePhoneBookNoteByUserIdAndId(id, noteId, name, phoneNumber);
+    }
+
+    @Override
+    public Iterable<PhoneBookNote> getPhoneBookNotesByPhoneNumber(String phoneNumber) {
+        return phoneBookRepository.findPhoneBookNoteByPhoneNumber(phoneNumber);
     }
 }

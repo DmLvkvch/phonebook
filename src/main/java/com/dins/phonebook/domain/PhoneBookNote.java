@@ -1,11 +1,12 @@
-package com.dins.phonebook.entity;
+package com.dins.phonebook.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints=
+@UniqueConstraint(columnNames = {"user_id", "phoneNumber"}))
 public class PhoneBookNote {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

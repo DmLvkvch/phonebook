@@ -1,4 +1,4 @@
-package com.dins.phonebook.entity;
+package com.dins.phonebook.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

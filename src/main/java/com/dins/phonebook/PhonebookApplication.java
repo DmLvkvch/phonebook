@@ -1,7 +1,7 @@
 package com.dins.phonebook;
 
-import com.dins.phonebook.entity.User;
-import com.dins.phonebook.entity.PhoneBookNote;
+import com.dins.phonebook.domain.User;
+import com.dins.phonebook.domain.PhoneBookNote;
 import com.dins.phonebook.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

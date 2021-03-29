@@ -2,7 +2,7 @@ package com.dins.phonebook.service;
 
 import com.dins.phonebook.controller.MainController;
 import com.dins.phonebook.controller.UserController;
-import com.dins.phonebook.entity.User;
+import com.dins.phonebook.domain.User;
 import com.dins.phonebook.exception.UserNotFoundException;
 import com.dins.phonebook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
