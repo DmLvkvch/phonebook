@@ -7,8 +7,7 @@ public interface UserService {
     EntityModel<User> getUser(Long id);
     Iterable<User> getAllUsers();
     Iterable<User> getUsersByNameLike(String name);
-    void deleteUser(Long id);
-    void addUser(User user);
-    void updateUser(User user);
-    void updateName(Long id, String name);
+    boolean deleteUser(Long id);
+    boolean addUser(User user);
+    boolean updateName(Long id, String name);
 }

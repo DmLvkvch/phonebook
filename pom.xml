@@ -12,7 +12,7 @@
     <artifactId>phonebook</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>phonebook</name>
-    <description>Phone book project for Spring Boot</description>
+    <description>Phone boot project</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -38,12 +38,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-hateoas -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,6 +45,12 @@
             <version>2.3.6.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>2.3.6.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -61,5 +61,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -37,23 +37,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public boolean deleteUser(Long id) {
         userRepository.deleteById(id);
+        return true;
     }
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         user.getPhoneBook().forEach(b->b.setUser(user));
         userRepository.save(user);
+        return true;
     }
 
     @Override
-    public void updateUser(User user) {
-
-    }
-
-    @Override
-    public void updateName(Long id, String name) {
+    public boolean updateName(Long id, String name) {
         userRepository.updateName(id, name);
+        return true;
     }
 }

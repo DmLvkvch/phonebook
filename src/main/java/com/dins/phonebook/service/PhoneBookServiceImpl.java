@@ -50,28 +50,32 @@ public class PhoneBookServiceImpl implements PhoneBookService{
     }
 
     @Override
-    public void deletePhoneBookNote(Long id) {
+    public boolean deletePhoneBookNote(Long id) {
         phoneBookRepository.deleteById(id);
+        return true;
     }
 
     @Override
-    public void deletePhoneBookNoteByUserIdAndPhoneBookId(Long id, Long phoneBookNoteId) {
+    public boolean deletePhoneBookNoteByUserIdAndPhoneBookId(Long id, Long phoneBookNoteId) {
         phoneBookRepository.deletePhoneBookNoteByUserIdAndId(id, phoneBookNoteId);
+        return true;
     }
 
     @Override
-    public void addPhoneBookNote(Long id, PhoneBookNote phoneBookNote) {
+    public boolean addPhoneBookNote(Long id, PhoneBookNote phoneBookNote) {
         phoneBookNote.setUser(userRepository.findById(id).get());
         try {
             phoneBookRepository.save(phoneBookNote);
         } catch (Exception e){
             throw new DuplicatePhoneNumber(phoneBookNote.getPhoneNumber());
         }
+        return true;
     }
 
     @Override
-    public void updatePhoneBookNoteByUserIdAndId(Long id, Long noteId, String name, String phoneNumber) {
+    public boolean updatePhoneBookNoteByUserIdAndId(Long id, Long noteId, String name, String phoneNumber) {
         phoneBookRepository.updatePhoneBookNoteByUserIdAndId(id, noteId, name, phoneNumber);
+        return true;
     }
 
     @Override
