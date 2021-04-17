@@ -1,5 +1,4 @@
 # phonebook
-Test task DINS
 
 docker-compose build
 
