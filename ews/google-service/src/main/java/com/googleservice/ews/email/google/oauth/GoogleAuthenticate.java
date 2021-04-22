@@ -6,12 +6,11 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.googleservice.ews.EwsApplication;
-
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.gmail.GmailScopes;
+import com.googleservice.ews.EwsApplication;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Lazy;
@@ -38,7 +37,7 @@ public class GoogleAuthenticate implements OAuth2 {
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
     private static final GoogleAuthorizationCodeFlow GOOGLE_AUTHORIZATION = getGoogleAuthorizationCredentials();
 
-    public GoogleAuthenticate(){
+    public GoogleAuthenticate() {
     }
 
     private static GoogleAuthorizationCodeFlow getGoogleAuthorizationCredentials() {

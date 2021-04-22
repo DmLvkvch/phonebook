@@ -1,21 +1,30 @@
 package com.googleservice.ews;
 
-import com.dmlvkvch.oauth.domain.*;
+import com.dmlvkvch.oauth.domain.OAuth2UserAccessCredential;
+import com.dmlvkvch.oauth.domain.ServiceType;
+import com.dmlvkvch.oauth.domain.User;
+import com.dmlvkvch.oauth.domain.UserServiceInfo;
+import com.googleservice.ews.email.google.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
-import java.util.ArrayList;
 
 @SpringBootApplication
 @EntityScan(
         basePackages = "com.dmlvkvch.oauth",
         basePackageClasses = {User.class, OAuth2UserAccessCredential.class,
-                              ServiceType.class, UserServiceInfo.class}
+                ServiceType.class, UserServiceInfo.class}
 )
+@PropertySource(value = {"google.properties"})
 public class EwsApplication {
+
+    @Autowired
+    private UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(EwsApplication.class, args);
@@ -26,12 +35,9 @@ public class EwsApplication {
 
         return (args) -> {
             User u = new User();
-            ArrayList<OAuth2UserAccessCredential> objects = new ArrayList<>() {{
-                add(new OAuth2UserAccessCredential());
-                add(new OAuth2UserAccessCredential());
-            }};
-            u.setOAuth2UserAccessCredentialList(objects);
-            u.getOAuth2UserAccessCredentialList().forEach(o->o.setUser(u));
+            u.setOAuth2UserAccessCredential(new OAuth2UserAccessCredential());
+            u.getOAuth2UserAccessCredential().setUser(u);
+            userRepository.save(u);
         };
     }
 }

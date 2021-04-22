@@ -1,24 +1,19 @@
 package com.dmlvkvch.oauth.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Entity
-public class UserServiceInfo implements Serializable {
+public class UserServiceInfo extends AbstractEntity implements Serializable {
 
-    @Id
-    private Long id;
+    private String email;
 
-    private String name;
-
-    private ServiceType serviceType;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User user;
