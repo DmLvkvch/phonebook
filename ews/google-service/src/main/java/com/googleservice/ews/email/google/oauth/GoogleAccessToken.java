@@ -2,44 +2,30 @@ package com.googleservice.ews.email.google.oauth;
 
 
 import com.dmlvkvch.oauth.authenticate.AccessToken;
-import com.dmlvkvch.oauth.authenticate.TokenType;
+import com.dmlvkvch.oauth.domain.ServiceType;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class GoogleAccessToken implements AccessToken {
 
-    private final GoogleTokenResponse googleTokenResponse;
+    private String refreshToken;
+    private String accessToken;
+    private Long expiresInSeconds;
+    private String tokenType;
+    private ServiceType serviceTokenType;
+    private String scope;
 
-    public GoogleAccessToken(GoogleTokenResponse googleTokenResponse){
-        this.googleTokenResponse = googleTokenResponse;
-    }
-
-    @Override
-    public String getAccessToken() {
-        return googleTokenResponse.getAccessToken();
-    }
-
-    @Override
-    public String getRefreshToken() {
-        return googleTokenResponse.getRefreshToken();
-    }
-
-    @Override
-    public Long getExpiresInSeconds() {
-        return googleTokenResponse.getExpiresInSeconds();
-    }
-
-    @Override
-    public String getTokenType() {
-        return googleTokenResponse.getTokenType();
-    }
-
-    @Override
-    public TokenType getServiceTokenType() {
-        return TokenType.GOOGLE_TOKEN;
-    }
-
-    @Override
-    public String getScope() {
-        return googleTokenResponse.getScope();
+    public GoogleAccessToken(GoogleTokenResponse googleTokenResponse) {
+        this.refreshToken = googleTokenResponse.getRefreshToken();
+        this.accessToken = googleTokenResponse.getAccessToken();
+        this.serviceTokenType = ServiceType.GMAIL;
+        this.expiresInSeconds = googleTokenResponse.getExpiresInSeconds();
+        this.tokenType = googleTokenResponse.getTokenType();
+        this.scope = googleTokenResponse.getScope();
     }
 }

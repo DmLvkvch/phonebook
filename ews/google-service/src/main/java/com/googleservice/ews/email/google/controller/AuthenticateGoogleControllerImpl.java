@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-//@PropertySource("classpath:google.properties")
 @RequestMapping("/api/oauth/${url.oauth}")
 public class AuthenticateGoogleControllerImpl implements OAuth2GoogleController {
 
@@ -22,12 +21,6 @@ public class AuthenticateGoogleControllerImpl implements OAuth2GoogleController 
     @GetMapping("${url.login}")
     public String signIn() {
         return oAuthService.getOAuthUri().toString();
-    }
-
-
-    @GetMapping("${url.logout}")
-    public String logOut() {
-        return null;
     }
 
     @GetMapping("${url.redirect}")

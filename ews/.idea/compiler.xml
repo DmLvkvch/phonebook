@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="googleservice" />
+        <module name="main" />
+        <module name="oauth" />
+        <module name="telegram_bot" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ews" target="11" />
+      <module name="googleservice" target="11" />
+      <module name="main" target="11" />
+      <module name="oauth" target="11" />
+      <module name="telegram_bot" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="googleservice" options="-parameters" />
+      <module name="main" options="-parameters" />
+      <module name="oauth" options="-parameters" />
+    </option>
+  </component>
+</project>

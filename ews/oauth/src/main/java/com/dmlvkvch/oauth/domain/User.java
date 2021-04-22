@@ -1,40 +1,32 @@
 package com.dmlvkvch.oauth.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+public class User extends AbstractEntity implements Serializable {
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @JsonIgnore
-    private List<OAuth2UserAccessCredential> oAuth2UserAccessCredentialList;
+    private OAuth2UserAccessCredential oAuth2UserAccessCredential;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @JsonIgnore
-    private List<UserServiceInfo> userServiceInfoList;
+    private UserServiceInfo userServiceInfo;
 
-    public User(List<OAuth2UserAccessCredential> oAuth2UserAccessCredentialList) {
-        this.oAuth2UserAccessCredentialList = oAuth2UserAccessCredentialList;
-    }
-
-    public User(List<OAuth2UserAccessCredential> oAuth2UserAccessCredentialList, List<UserServiceInfo> userServiceInfoList) {
-        this.oAuth2UserAccessCredentialList = oAuth2UserAccessCredentialList;
-        this.userServiceInfoList = userServiceInfoList;
+    public User(OAuth2UserAccessCredential oAuth2UserAccessCredential, UserServiceInfo userServiceInfo) {
+        this.oAuth2UserAccessCredential = oAuth2UserAccessCredential;
+        this.userServiceInfo = userServiceInfo;
     }
 }
