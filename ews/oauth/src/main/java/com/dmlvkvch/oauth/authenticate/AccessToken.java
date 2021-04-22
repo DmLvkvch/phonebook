@@ -1,12 +1,17 @@
 package com.dmlvkvch.oauth.authenticate;
 
-import java.util.List;
+import com.dmlvkvch.oauth.domain.ServiceType;
 
 public interface AccessToken {
     String getAccessToken();
+
     String getRefreshToken();
+
     Long getExpiresInSeconds();
+
     String getTokenType();
-    TokenType getServiceTokenType();
+
+    ServiceType getServiceTokenType();
+
     String getScope();
 }

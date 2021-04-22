@@ -4,7 +4,6 @@ import com.dmlvkvch.oauth.authenticate.AccessToken;
 import com.dmlvkvch.oauth.domain.User;
 import com.dmlvkvch.oauth.service.OAuthService;
 
-
 import java.net.URI;
 import java.util.Map;
 
